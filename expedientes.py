@@ -160,3 +160,38 @@ def contar_expedientes():
     print("Pendientes:", pendientes)
     print("Atendidos:", atendidos)
     print("Observados:", observados)
+
+def filtrar_por_estado():
+    print("\n--- FILTRAR POR ESTADO ---")
+    print("1. Pendiente")
+    print("2. Atendido")
+    print("3. Observado")
+
+    opcion = input("Selecciona el estado: ").strip()
+
+    estados_opciones = {
+        "1": "Pendiente",
+        "2": "Atendido",
+        "3": "Observado"
+    }
+
+    if opcion not in estados_opciones:
+        print("Opción no válida.")
+        return
+
+    estado_buscado = estados_opciones[opcion]
+    encontrados = 0
+
+    for i in range(len(datos.estados)):
+        if datos.estados[i] == estado_buscado:
+            print(
+                f"Código: {datos.codigos[i]} | "
+                f"Nombre: {datos.nombres[i]} | "
+                f"Estado: {datos.estados[i]}"
+            )
+            encontrados += 1
+
+    if encontrados == 0:
+        print("No hay expedientes con ese estado.")
+    else:
+        print("Total encontrados:", encontrados)
