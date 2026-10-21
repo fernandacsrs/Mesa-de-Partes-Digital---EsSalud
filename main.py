@@ -19,7 +19,8 @@ def menu_principal():
         print("5. Cargar datos desde archivo binario")
         print("6. Guardar datos en archivo plano (.txt)")
         print("7. Cargar datos desde archivo plano (.txt)")
-        print("8. Salir")
+        print("8. Contar expedientes registrados")
+        print("9. Salir")
         try:
             opcion = int(input("Seleccione una opción: "))
         except ValueError:
@@ -41,6 +42,8 @@ def menu_principal():
         elif opcion == 7:
             cargar_plano()
         elif opcion == 8:
+            expedientes.contar_expedientes()
+        elif opcion == 9:
             print("Cerrando sistema...")
             break
         else:

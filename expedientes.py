@@ -146,3 +146,17 @@ def ordenar_y_listar():
         print(datos.codigos[i], "|", datos.nombresExp[i], "|", datos.numerosDoc[i],
               "|", datos.fechas[i], "|", datos.estados[i])
     print("Total:", datos.contador)
+
+def contar_expedientes():
+    total = len(datos.codigos)
+
+    print("\n--- TOTAL DE EXPEDIENTES ---")
+    print("Cantidad de expedientes registrados:", total)
+
+    pendientes = datos.estados.count("Pendiente")
+    atendidos = datos.estados.count("Atendido")
+    observados = datos.estados.count("Observado")
+
+    print("Pendientes:", pendientes)
+    print("Atendidos:", atendidos)
+    print("Observados:", observados)
