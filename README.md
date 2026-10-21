@@ -1,23 +1,25 @@
-# Mesa de Partes Digital - EsSalud
+# Mesa de Partes Digital
 
-Prototipo de consola en Python. Permite registrar, buscar y ordenar expedientes, además de guardar y cargar información desde un archivo binario y un archivo de texto.
+## Descripción
+Prototipo en Python para registrar, consultar y ordenar expedientes
+de una mesa de partes digital.
 
-## Archivos del proyecto
+## Funcionalidades
+- Registro de expedientes.
+- Validación de documentos, teléfonos, correos, fechas y horas.
+- Búsqueda por código o número de documento.
+- Listado y ordenamiento de expedientes.
+- Guardado y carga de archivos de texto JSON.
+- Guardado y carga de archivos binarios.
 
-- `main.py`: menú principal y navegación.
-- `datos.py`: arreglos paralelos, contador y nombres de archivos.
-- `validaciones.py`: validación de documento, teléfono, correo, fecha y hora.
-- `expedientes.py`: registro, visualización, búsqueda y ordenamiento.
-- `archivos.py`: carga y guardado de los datos.
+## Módulos
+- main.py: menú principal.
+- datos.py: arreglos de datos.
+- validaciones.py: validaciones de entrada.
+- expedientes.py: operaciones con expedientes.
+- archivos.py: lectura y escritura de archivos.
 
 ## Ejecución
+Ejecutar en la terminal:
 
-Con Python instalado, abre una terminal y ejecuta:
-
-```bash
 python main.py
-```
-
-En Windows también puedes utilizar `py main.py`.
-
-Los archivos `expedientes.dat` y `expedientes.txt` se crean cuando se guardan datos. No se incluyen en el repositorio porque contienen información de los registros de prueba.
