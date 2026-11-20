@@ -21,7 +21,8 @@ def menu_principal():
         print("7. Cargar datos desde archivo plano (.txt)")
         print("8. Contar expedientes registrados")
         print("9. Filtrar expedientes por estado")
-        print("10. Salir")
+        print("10. Actualizar estado de expediente")
+        print("11. Salir")
         try:
             opcion = int(input("Seleccione una opción: "))
         except ValueError:
@@ -47,6 +48,8 @@ def menu_principal():
         elif opcion == 9:
             expedientes.filtrar_por_estado()
         elif opcion == 10:
+            expedientes.actualizar_estado()
+        elif opcion == 11:
             print("Cerrando sistema...")
             break
         else:
