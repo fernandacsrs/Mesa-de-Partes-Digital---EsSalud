@@ -195,3 +195,36 @@ def filtrar_por_estado():
         print("No hay expedientes con ese estado.")
     else:
         print("Total encontrados:", encontrados)
+
+def actualizar_estado():
+    print("\n--- ACTUALIZAR ESTADO ---")
+
+    codigo = input("Código del expediente: ").strip().upper()
+
+    if codigo not in datos.codigos:
+        print("No se encontró el expediente.")
+        return
+
+    posicion = datos.codigos.index(codigo)
+
+    print("Estado actual:", datos.estados[posicion])
+    print("1. Pendiente")
+    print("2. Atendido")
+    print("3. Observado")
+
+    opcion = input("Selecciona el nuevo estado: ").strip()
+
+    nuevos_estados = {
+        "1": "Pendiente",
+        "2": "Atendido",
+        "3": "Observado"
+    }
+
+    if opcion not in nuevos_estados:
+        print("Opción no válida. No se modificó el estado.")
+        return
+
+    datos.estados[posicion] = nuevos_estados[opcion]
+
+    print("Estado actualizado correctamente.")
+    mostrar_expediente(posicion)
