@@ -53,7 +53,7 @@ def menu_principal():
             print("Cerrando sistema...")
             break
         else:
-            print("Seleccione una opción del 1 al 10.")
+            print("Seleccione una opción del 1 al 11.")
 
 if __name__ == "__main__":
     menu_principal()
