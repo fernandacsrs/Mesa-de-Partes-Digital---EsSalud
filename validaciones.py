@@ -1,7 +1,42 @@
 # Funciones de validación de los datos ingresados.
 
 def es_numerico(cadena):
+    """
+    Comprueba que una cadena contenga únicamente números.
+    """
     return len(cadena) > 0 and cadena.isdigit()
+
+def nombre_valido(nombre):
+    """
+    Verifica que el nombre contenga únicamente letras
+    y espacios, y que tenga como mínimo 3 letras.
+    """
+    nombre = nombre.strip()
+
+    # Evita nombres vacíos.
+    if not nombre:
+        return False
+    # Separa las palabras y elimina espacios repetidos.
+    palabras = nombre.split()
+
+    # Comprueba que todas las palabras tengan solo letras.
+    if not all(palabra.isalpha() for palabra in palabras):
+        return False
+
+    # Comprueba que existan al menos 3 letras.
+    cantidad_letras = sum(len(palabra) for palabra in palabras)
+
+    return cantidad_letras >= 3
+
+def formatear_nombres(nombre):
+    """
+    Organiza los nombres colocando la primera letra
+    de cada palabra en mayúscula.
+    """
+    return " ".join(
+        palabra.capitalize()
+        for palabra in nombre.split()
+    )
 
 def documento_valido(tipo, numero):
     tipo = tipo.upper()
