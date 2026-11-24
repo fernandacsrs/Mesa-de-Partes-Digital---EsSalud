@@ -1,6 +1,14 @@
 # Registro, visualización, búsqueda y ordenamiento de expedientes.
 import datos
-from validaciones import documento_valido, telefono_valido, correo_valido, fecha_valida, hora_valida
+from validaciones import (
+    documento_valido,
+    telefono_valido,
+    correo_valido,
+    fecha_valida,
+    hora_valida,
+    nombre_valido,
+    formatear_nombres
+)
 
 def registrar_expediente():
     if datos.contador >= datos.LIMITE:
@@ -20,11 +28,17 @@ def registrar_expediente():
         print("Número de documento no válido.")
 
     while True:
-        nombres = input("Nombres o razón social: ").strip()
-        if nombres:
-            break
-        print("El nombre no puede estar vacío.")
 
+        nombres = input("Ingrese nombres y apellidos: ").strip()
+
+        if nombre_valido(nombres):
+            nombres = formatear_nombres(nombres)
+            break
+
+        print("Nombre no válido.")
+        print("Ingrese únicamente letras y espacios.")
+        print("Debe contener como mínimo 3 letras.")
+                    
     while True:
         telefono = input("Teléfono (9 dígitos, empieza con 9): ").strip()
         if telefono_valido(telefono):
