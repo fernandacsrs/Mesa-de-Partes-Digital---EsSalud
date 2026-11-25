@@ -3,7 +3,7 @@
 # Importación de módulos y funciones necesarias para el sistema.
 import os
 import datos
-from expedientes import registrar_expediente, buscar_expediente, ordenar_y_listar
+import expedientes
 from archivos import guardar_binario, cargar_binario, guardar_plano, cargar_plano
 
 # Controla el menú principal y las operaciones del sistema.
@@ -53,11 +53,11 @@ def menu_principal():
         elif opcion == 7:
             cargar_plano()
         elif opcion == 8:
-            expedientes.contar_expedientes()
+            contar_expedientes()
         elif opcion == 9:
-            expedientes.filtrar_por_estado()
+            filtrar_por_estado()
         elif opcion == 10:
-            expedientes.actualizar_estado()
+            actualizar_estado()
 
         # Finaliza el programa cuando el usuario selecciona salir.
         elif opcion == 11:
