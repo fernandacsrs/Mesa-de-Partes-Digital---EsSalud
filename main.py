@@ -45,13 +45,13 @@ def menu_principal():
         elif opcion == 3:
             expedientes.ordenar_y_listar()
         elif opcion == 4:
-            expedientes.guardar_binario()
+            guardar_binario()
         elif opcion == 5:
-            expedientes.cargar_binario()
+            cargar_binario()
         elif opcion == 6:
-            expedientes.guardar_plano()
+            guardar_plano()
         elif opcion == 7:
-            expedientes.cargar_plano()
+            cargar_plano()
         elif opcion == 8:
             expedientes.contar_expedientes()
         elif opcion == 9:
