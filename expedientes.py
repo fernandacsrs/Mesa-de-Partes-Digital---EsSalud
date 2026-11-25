@@ -155,9 +155,6 @@ def registrar_expediente():
 
         # Muestra la fecha en formato DD/MM/AAAA.
         print("Siguiente día hábil:", siguiente_dia.strftime("%d/%m/%Y"))
-        
-    # Registrar el expediente con estado inicial pendiente.
-    datos.estados.append("Pendiente")
 
     # Almacenar los datos del expediente en sus listas correspondientes.
     datos.codigos.append(codigo)
@@ -171,6 +168,7 @@ def registrar_expediente():
     datos.areasDestino.append(area_destino)
     datos.fechas.append(fecha)
     datos.horas.append(hora)
+    datos.estados.append("Pendiente")
     datos.foliosExp.append(folios)
 
     print("\nExpediente registrado correctamente.")
