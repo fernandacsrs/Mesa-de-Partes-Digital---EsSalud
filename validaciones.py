@@ -1,3 +1,5 @@
+from email_validator import validate_email, EmailNotValidError
+
 # Funciones de validación de los datos ingresados.
 
 def es_numerico(cadena):
@@ -59,20 +61,16 @@ def documento_valido(tipo, numero):
 def telefono_valido(telefono):
     return len(telefono) == 9 and es_numerico(telefono) and telefono.startswith("9")
 
-# Comprueba que el correo electrónico tenga un formato básico válido.
+# Comprueba que el correo tenga un formato válido y que su dominio exista.
 def correo_valido(correo):
 
-    # Rechaza correos demasiado cortos, con espacios o con una cantidad incorrecta de arrobas.
-    if len(correo) < 6 or " " in correo or correo.count("@") != 1:
+    try:
+        # Valida el formato del correo y comprueba la existencia del dominio.
+        validate_email(correo, check_deliverability=True)
+        return True
+
+    except EmailNotValidError:
         return False
-
-    # Identifica la posición de la arroba y del último punto.
-    posicion_arroba = correo.find("@")
-    posicion_punto = correo.rfind(".")
-
-    # Verifica que los elementos del correo estén ubicados correctamente.
-    return (posicion_arroba > 0 and posicion_punto > posicion_arroba + 1
-            and posicion_punto < len(correo) - 1)
 
 # Valida el formato y los valores de una fecha de ingreso.
 def fecha_valida(fecha):
