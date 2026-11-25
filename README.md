@@ -9,6 +9,9 @@ Prototipo de consola en Python. Permite registrar, buscar y ordenar expedientes,
 - `validaciones.py`: validación de documento, teléfono, correo, fecha y hora.
 - `expedientes.py`: registro, visualización, búsqueda y ordenamiento.
 - `archivos.py`: carga y guardado de los datos.
+- `test_validaciones.py`: pruebas automáticas con la biblioteca unittest para verificar el funcionamiento de las validaciones de datos.
+- `requirements.txt`: configuración que especifica las dependencias del proyecto.
+- `.gitignore`: configuración de Git que define qué elementos no deben subirse al repositorio.
 
 ### Instalación de dependencias
 
