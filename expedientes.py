@@ -10,10 +10,7 @@ from validaciones import (
     formatear_nombres
 )
 
-# Solicita y valida los datos necesarios para registrar un expediente.
 def registrar_expediente():
-
-    # Verificar que no se haya alcanzado el límite de registros.
     if datos.contador >= datos.LIMITE:
         print("Límite de expedientes alcanzado.")
         return
@@ -54,23 +51,33 @@ def registrar_expediente():
             break
         print("Correo no válido.")
 
-    while True:
-        tipo_tramite = input("Tipo de trámite: ").strip()
-        if tipo_tramite:
-            break
-        print("El tipo de trámite no puede estar vacío.")
+# Opciones disponibles para el tipo de trámite
+tipos_tramite = [
+    "TUPA",
+    "NO TUPA",
+    "Descanso Médico",
+    "Reclamo"
+]
 
-    # Validar que el asunto no esté vacío y tenga
-    # un máximo de 100 caracteres.
-    while True:
-        asunto = input("Asunto (máximo 100 caracteres): ").strip()
+print("\nSeleccione el tipo de trámite:")
+for i, tipo in enumerate(tipos_tramite, 1):
+    print(f"{i}. {tipo}\n")
 
-        if not asunto:
-            print("El asunto no puede estar vacío.")
-        elif len(asunto) > 100:
-            print("El asunto no puede superar los 100 caracteres.")
-        else:
+while True:
+    try:
+        opcion = int(input("Ingrese una opción: "))
+        if 1 <= opcion <= len(tipos_tramite):
+            tipo_tramite = tipos_tramite[opcion - 1]
             break
+        print("Opción no válida. Intente nuevamente.")
+    except ValueError:
+        print("Debe ingresar un número.")
+
+    while True:
+        asunto = input("Asunto: ").strip()
+        if asunto:
+            break
+        print("El asunto no puede estar vacío.")
 
     while True:
         try:
@@ -81,11 +88,27 @@ def registrar_expediente():
         except ValueError:
             print("Ingrese un número entero válido.")
 
-    while True:
-        area_destino = input("Área de destino: ").strip()
-        if area_destino:
+   
+# Opciones disponibles para el área de destino
+areas_destino = [
+    "Admisión",
+    "Jefatura Médica",
+    "Trámite Documentario"
+]
+
+print("\nSeleccione el área de destino:")
+for i, area in enumerate(areas_destino, 1):
+    print(f"{i}. {area}")
+
+while True:
+    try:
+        opcion_area = int(input("Ingrese una opción: "))
+        if 1 <= opcion_area <= len(areas_destino):
+            area_destino = areas_destino[opcion_area - 1]
             break
-        print("El área no puede estar vacía.")
+        print("Opción no válida. Intente nuevamente.")
+    except ValueError:
+        print("Debe ingresar un número.")
 
     while True:
         fecha = input("Fecha de ingreso (DD/MM/AAAA): ").strip()
@@ -99,13 +122,11 @@ def registrar_expediente():
             break
         print("Hora no válida.")
 
-    # Incrementar el contador y generar un código para el expediente.
     datos.contador += 1
     codigo = f"EXP-2026-{datos.contador:03d}"
     if hora > "17:00":
         print("Aviso: registro posterior a las 17:00.")
 
-    # Almacenar los datos del expediente en sus listas correspondientes.
     datos.codigos.append(codigo)
     datos.tiposDoc.append(tipo_doc)
     datos.numerosDoc.append(num_doc)
@@ -123,7 +144,6 @@ def registrar_expediente():
     print("\nExpediente registrado correctamente.")
     mostrar_expediente(datos.contador - 1)
 
-# Muestra toda la información de un expediente según su posición.
 def mostrar_expediente(i):
     print("================================")
     print("Código:", datos.codigos[i])
@@ -139,7 +159,6 @@ def mostrar_expediente(i):
     print("Hora:", datos.horas[i])
     print("Estado:", datos.estados[i])
 
-# Busca expedientes mediante su código o número de documento.
 def buscar_expediente():
     if datos.contador == 0:
         print("No existen expedientes registrados.")
@@ -156,7 +175,6 @@ def buscar_expediente():
         print("================================")
         print(f"Se encontraron {cantidad} expediente(s).")
 
-# Ordena los expedientes por código y muestra el listado.
 def ordenar_y_listar():
     if datos.contador == 0:
         print("No hay expedientes para listar.")
@@ -164,9 +182,6 @@ def ordenar_y_listar():
     arreglos = [datos.codigos, datos.tiposDoc, datos.numerosDoc, datos.nombresExp,
                 datos.correos, datos.telefonos, datos.tiposTramite, datos.asuntos,
                 datos.areasDestino, datos.fechas, datos.horas, datos.estados, datos.foliosExp]
-
-    # Intercambiar los elementos de todas las listas para mantener
-    # la correspondencia de los datos de cada expediente.
     for i in range(datos.contador - 1):
         for j in range(i + 1, datos.contador):
             if datos.codigos[i] > datos.codigos[j]:
@@ -178,7 +193,6 @@ def ordenar_y_listar():
               "|", datos.fechas[i], "|", datos.estados[i])
     print("Total:", datos.contador)
 
-# Muestra la cantidad total de expedientes y su distribución por estado.
 def contar_expedientes():
     total = len(datos.codigos)
 
@@ -193,7 +207,6 @@ def contar_expedientes():
     print("Atendidos:", atendidos)
     print("Observados:", observados)
 
-# Filtra y muestra los expedientes según el estado seleccionado.
 def filtrar_por_estado():
     print("\n--- FILTRAR POR ESTADO ---")
     print("1. Pendiente")
@@ -229,7 +242,6 @@ def filtrar_por_estado():
     else:
         print("Total encontrados:", encontrados)
 
-# Permite modificar el estado de un expediente mediante su código.
 def actualizar_estado():
     print("\n--- ACTUALIZAR ESTADO ---")
 
