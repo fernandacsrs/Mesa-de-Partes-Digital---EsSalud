@@ -39,25 +39,25 @@ def menu_principal():
 
         # Ejecuta la función correspondiente a la opción seleccionada.
         if opcion == 1:
-            registrar_expediente()
+            expedientes.registrar_expediente()
         elif opcion == 2:
-            buscar_expediente()
+            expedientes.buscar_expediente()
         elif opcion == 3:
-            ordenar_y_listar()
+            expedientes.ordenar_y_listar()
         elif opcion == 4:
-            guardar_binario()
+            expedientes.guardar_binario()
         elif opcion == 5:
-            cargar_binario()
+            expedientes.cargar_binario()
         elif opcion == 6:
-            guardar_plano()
+            expedientes.guardar_plano()
         elif opcion == 7:
-            cargar_plano()
+            expedientes.cargar_plano()
         elif opcion == 8:
-            contar_expedientes()
+            expedientes.contar_expedientes()
         elif opcion == 9:
-            filtrar_por_estado()
+            expedientes.filtrar_por_estado()
         elif opcion == 10:
-            actualizar_estado()
+            expedientes.actualizar_estado()
 
         # Finaliza el programa cuando el usuario selecciona salir.
         elif opcion == 11:
