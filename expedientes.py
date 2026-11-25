@@ -32,7 +32,6 @@ def registrar_expediente():
         print("Número de documento no válido.")
 
     while True:
-
         nombres = input("Ingrese nombres y apellidos: ").strip()
 
         if nombre_valido(nombres):
@@ -55,14 +54,33 @@ def registrar_expediente():
             break
         print("Correo no válido.")
 
-    while True:
-        tipo_tramite = input("Tipo de trámite: ").strip()
-        if tipo_tramite:
-            break
-        print("El tipo de trámite no puede estar vacío.")
+    # Opciones disponibles para el tipo de trámite.
+    tipos_tramite = [
+        "TUPA",
+        "NO TUPA",
+        "Descanso Médico",
+        "Reclamo"
+    ]
 
-    # Validar que el asunto no esté vacío y tenga
-    # un máximo de 100 caracteres.
+    # Mostrar las opciones disponibles y permitir seleccionar una.
+    print("\nSeleccione el tipo de trámite:")
+    for i, tipo in enumerate(tipos_tramite, 1):
+        print(f"{i}. {tipo}")
+
+    while True:
+        try:
+            opcion = int(input("Ingrese una opción: "))
+
+            if 1 <= opcion <= len(tipos_tramite):
+                tipo_tramite = tipos_tramite[opcion - 1]
+                break
+
+            print("Opción no válida. Intente nuevamente.")
+
+        except ValueError:
+            print("Debe ingresar un número.")
+
+    # Validar que el asunto no esté vacío y tenga un máximo de 100 caracteres.
     while True:
         asunto = input("Asunto (máximo 100 caracteres): ").strip()
 
@@ -82,11 +100,31 @@ def registrar_expediente():
         except ValueError:
             print("Ingrese un número entero válido.")
 
+   
+    # Opciones disponibles para el área de destino.
+    areas_destino = [
+        "Admisión",
+        "Jefatura Médica",
+        "Trámite Documentario"
+    ]
+
+    # Mostrar las opciones disponibles y permitir seleccionar una.
+    print("\nSeleccione el área de destino:")
+    for i, area in enumerate(areas_destino, 1):
+        print(f"{i}. {area}")
+
     while True:
-        area_destino = input("Área de destino: ").strip()
-        if area_destino:
-            break
-        print("El área no puede estar vacía.")
+        try:
+            opcion_area = int(input("Ingrese una opción: "))
+
+            if 1 <= opcion_area <= len(areas_destino):
+                area_destino = areas_destino[opcion_area - 1]
+                break
+
+            print("Opción no válida. Intente nuevamente.")
+
+        except ValueError:
+            print("Debe ingresar un número.")
 
     while True:
         fecha = input("Fecha de ingreso (DD/MM/AAAA): ").strip()
@@ -103,6 +141,8 @@ def registrar_expediente():
     # Incrementar el contador y generar un código para el expediente.
     datos.contador += 1
     codigo = f"EXP-2026-{datos.contador:03d}"
+
+    # Avisar si el registro se realiza después de las 17:00.
     if hora > "17:00":
         print("Aviso: registro posterior a las 17:00.")
 
@@ -115,6 +155,9 @@ def registrar_expediente():
 
         # Muestra la fecha en formato DD/MM/AAAA.
         print("Siguiente día hábil:", siguiente_dia.strftime("%d/%m/%Y"))
+        
+    # Registrar el expediente con estado inicial pendiente.
+    datos.estados.append("Pendiente")
 
     # Almacenar los datos del expediente en sus listas correspondientes.
     datos.codigos.append(codigo)
@@ -128,7 +171,6 @@ def registrar_expediente():
     datos.areasDestino.append(area_destino)
     datos.fechas.append(fecha)
     datos.horas.append(hora)
-    datos.estados.append("REGISTRADO")
     datos.foliosExp.append(folios)
 
     print("\nExpediente registrado correctamente.")
@@ -155,12 +197,15 @@ def buscar_expediente():
     if datos.contador == 0:
         print("No existen expedientes registrados.")
         return
+        
     parametro = input("Ingrese código o número de documento: ").strip()
     cantidad = 0
+    
     for i in range(datos.contador):
         if datos.codigos[i] == parametro or datos.numerosDoc[i] == parametro:
             mostrar_expediente(i)
             cantidad += 1
+            
     if cantidad == 0:
         print("No se encontró el expediente.")
     else:
@@ -172,21 +217,41 @@ def ordenar_y_listar():
     if datos.contador == 0:
         print("No hay expedientes para listar.")
         return
-    arreglos = [datos.codigos, datos.tiposDoc, datos.numerosDoc, datos.nombresExp,
-                datos.correos, datos.telefonos, datos.tiposTramite, datos.asuntos,
-                datos.areasDestino, datos.fechas, datos.horas, datos.estados, datos.foliosExp]
+        
+    arreglos = [
+        datos.codigos,
+        datos.tiposDoc,
+        datos.numerosDoc,
+        datos.nombresExp,
+        datos.correos,
+        datos.telefonos,
+        datos.tiposTramite,
+        datos.asuntos,
+        datos.areasDestino,
+        datos.fechas,
+        datos.horas,
+        datos.estados,
+        datos.foliosExp
+    ]
 
-    # Intercambiar los elementos de todas las listas para mantener
-    # la correspondencia de los datos de cada expediente.
+    # Intercambiar los elementos de todas las listas para mantener la correspondencia de los datos de cada expediente.
     for i in range(datos.contador - 1):
         for j in range(i + 1, datos.contador):
             if datos.codigos[i] > datos.codigos[j]:
                 for arreglo in arreglos:
                     arreglo[i], arreglo[j] = arreglo[j], arreglo[i]
+                    
     print("\nLISTADO ORDENADO POR CÓDIGO")
+    
     for i in range(datos.contador):
-        print(datos.codigos[i], "|", datos.nombresExp[i], "|", datos.numerosDoc[i],
-              "|", datos.fechas[i], "|", datos.estados[i])
+        print(
+            datos.codigos[i], "|",
+            datos.nombresExp[i], "|",
+            datos.numerosDoc[i], "|",
+            datos.fechas[i], "|",
+            datos.estados[i]
+        )
+        
     print("Total:", datos.contador)
 
 # Muestra la cantidad total de expedientes y su distribución por estado.
@@ -230,7 +295,7 @@ def filtrar_por_estado():
         if datos.estados[i] == estado_buscado:
             print(
                 f"Código: {datos.codigos[i]} | "
-                f"Nombre: {datos.nombres[i]} | "
+                f"Nombre: {datos.nombresExp[i]} | "
                 f"Estado: {datos.estados[i]}"
             )
             encontrados += 1
