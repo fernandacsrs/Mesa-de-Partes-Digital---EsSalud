@@ -10,6 +10,19 @@ Prototipo de consola en Python. Permite registrar, buscar y ordenar expedientes,
 - `expedientes.py`: registro, visualización, búsqueda y ordenamiento.
 - `archivos.py`: carga y guardado de los datos.
 
+### Instalación de dependencias
+
+Antes de ejecutar el proyecto, instala las dependencias necesarias.
+
+1. Abre una terminal en la carpeta principal del proyecto.
+2. Ejecuta el siguiente comando:
+
+```bash
+pip install -r requirements.txt
+```
+
+Este comando instala automáticamente las bibliotecas especificadas en el archivo `requirements.txt`.
+
 ## Ejecución
 
 Con Python instalado, abre una terminal y ejecuta:
