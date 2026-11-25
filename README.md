@@ -33,4 +33,16 @@ python main.py
 
 En Windows también puedes utilizar `py main.py`.
 
+### Pruebas automáticas
+
+El archivo `test_validaciones.py` contiene pruebas automatizadas desarrolladas con la biblioteca `unittest` de Python. Su propósito es comprobar el correcto funcionamiento de las funciones de validación de datos, como nombres, documentos, teléfonos, correos electrónicos, fechas y horas.
+
+Para ejecutar las pruebas, utiliza el siguiente comando desde la carpeta principal del proyecto:
+
+```bash
+python -m unittest -v test_validaciones.py
+```
+
+El resultado permite identificar si las validaciones funcionan correctamente o si existen errores que deben corregirse.
+
 Los archivos `expedientes.dat` y `expedientes.txt` se crean cuando se guardan datos. No se incluyen en el repositorio porque contienen información de los registros de prueba.
