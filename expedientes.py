@@ -1,5 +1,6 @@
 # Registro, visualización, búsqueda y ordenamiento de expedientes.
 import datos
+from datetime import datetime, timedelta
 from validaciones import (
     documento_valido,
     telefono_valido,
@@ -104,6 +105,16 @@ def registrar_expediente():
     codigo = f"EXP-2026-{datos.contador:03d}"
     if hora > "17:00":
         print("Aviso: registro posterior a las 17:00.")
+
+        # Calcula la fecha del siguiente día hábil.
+        siguiente_dia = datetime.strptime(fecha, "%d/%m/%Y") + timedelta(days=1)
+
+        # Omite los sábados y domingos.
+        while siguiente_dia.weekday() >= 5:
+            siguiente_dia += timedelta(days=1)
+
+        # Muestra la fecha en formato DD/MM/AAAA.
+        print("Siguiente día hábil:", siguiente_dia.strftime("%d/%m/%Y"))
 
     # Almacenar los datos del expediente en sus listas correspondientes.
     datos.codigos.append(codigo)
